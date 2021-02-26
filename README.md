@@ -1,6 +1,7 @@
 # Hotel
 
-A simple app for managing a hotel built with django.
+A simple app for managing a hotel.
+Written with django.
 
 
 ## Technologies
