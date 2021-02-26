@@ -19,7 +19,7 @@ Development:
 $ git clone https://github.com/mikolajsawicki/Hotel.git
 ```
 
-## Build & run
+## Build
 ```
 $ sudo apt-get install docker-compose OR $ sudo pacman -Syu docker-compose
 $ cd Hotel
