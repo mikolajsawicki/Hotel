@@ -1,0 +1,54 @@
+{% extends "hotelapp/base.html" %}
+
+{% block main_content %}
+{% get_today as today %}
+{% get_tomorrow as tomorrow %}
+
+<div class="container">
+    <br>
+    <div class="filters">
+
+        <h3>Przychody w okresie</h3>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="row filters">
+                <div class="daterange col-md-4">
+                    <label>Okres: </label>
+                    <div class="input-group input-daterange">
+                        <div class="input-group-addon">Od: &nbsp;</div>
+                        <input type="date" id="start" name="date_start"
+                               value="{{ date_start }}"
+                               min="{% get_today %}">
+                        <br>
+                        <div class="input-group-addon">&nbsp; do: &nbsp;</div>
+                        <input type="date" id="end" name="date_end"
+                               value="{{ date_end }}"
+                               min="{% get_tomorrow %}">
+                    </div>
+                </div>
+
+                <div class="guests_count col-md-4">
+                    <label>Przychody: </label>
+                    <div>
+                        <input type="number" min="1" max="10" name="income" placeholder="Przychody"
+                               value="{{ income }}" disabled>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Oblicz przychody</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <br>
+    <hr>
+    <div class="input-group-addon">Goście zarejestrowani:</div>
+    <input type="number" class="form-control" value="{{ guests_count }}" disabled>
+    <hr>
+    <div class="input-group-addon">Recepcjoniści zarejestrowani:</div>
+    <input type="number" class="form-control" value="{{ receptionists_count }}" disabled>
+</div>
+{% endblock %}

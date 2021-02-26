@@ -1,0 +1,76 @@
+{% extends "hotelapp/base.html" %}
+
+{% block main_content %}
+{% get_today as today %}
+{% get_tomorrow as tomorrow %}
+
+<div class="container">
+    <br>
+    <div class="filters">
+
+        <h3>Filtry</h3>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="row filters">
+                <div class="daterange col-md-4">
+                    <label>Wolne w terminie: </label>
+                    <div class="input-group input-daterange">
+                        <div class="input-group-addon">Od: &nbsp;</div>
+                        <input type="date" id="start" name="date_start"
+                               value="{{ date_start }}"
+                               min="{% get_today %}">
+                        <br>
+                        <div class="input-group-addon">&nbsp; do: &nbsp;</div>
+                        <input type="date" id="end" name="date_end"
+                               value="{{ date_end }}"
+                               min="{% get_tomorrow %}">
+                    </div>
+                </div>
+
+                <div class="guests_count col-md-4">
+                    <label>Minimalna liczba gości: </label>
+                    <div>
+                        <input type="number" min="1" max="10" name="guests_count" placeholder="Liczba gości"
+                               value="{{ guests_count }}">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Wyszukaj</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="row">
+        {% for room in rooms %}
+
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start col-md-6">
+                    <strong class="d-inline-block mb-2 text-success"> {{ room.price_for_night }}zł za dobę </strong>
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="#"> {{ room.name }} </a>
+                    </h3>
+                    <div class="mb-1 text-muted">{{ room.guests_count }}-osobowy</div>
+                    <p class="card-text mb-auto">{{ room.description }}</p>
+
+                    <form action="{% url 'hotelapp:room' room.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="date_start" value="{{ date_start }}">
+                        <input type="hidden" name="date_end" value="{{ date_end }}">
+                        <input type="hidden" name="guests_count" value="{{ guests_count }}">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Więcej</button>
+                    </form>
+                </div>
+                <img class="card-img-right flex-auto d-none d-md-block col-md-6" src="{{ room.photo.url }}"
+                     alt="Card image cap">
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

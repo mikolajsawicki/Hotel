@@ -1,0 +1,49 @@
+{% extends "hotelapp/base.html" %}
+
+{% block main_content %}
+<div class="container">
+    <br><br>
+    <h1>Rezerwacje</h1>
+
+    {% for reservation in reservations %}
+    <br>
+    <div class="col-md-6">
+        <h3>Rezerwacja</h3>
+        <form method="post">
+            {% csrf_token %}
+            <hr>
+            <div class="input-group-addon">Pokój:</div>
+            <input type="text" class="form-control" value="{{ reservation.room.name }}"
+                   disabled>
+            <input type="hidden" class="form-control" value="{{ reservation.id }}" name="reservation_id" readonly>
+            <br>
+            <div class="input-group-addon">Imię gościa:</div>
+            <input type="text" value="{{ reservation.guest.first_name }}" disabled>
+            <br><br>
+            <div class="input-group-addon">Nazwisko gościa:</div>
+            <input type="text" value="{{ reservation.guest.last_name }}" disabled>
+            <br><br>
+            <div class="input-group-addon">Od: &nbsp;</div>
+            <input type="text" id="start" value="{{ reservation.start_date }}" disabled>
+            <br> <br>
+            <div class="input-group-addon">Do: &nbsp;</div>
+            <input type="text" id="end" value="{{ reservation.end_date }}" disabled>
+            <br> <br>
+            <div class="input-group-addon">Liczba gości:</div>
+            <input type="number" value="{{ reservation.guests_count }}" name="guests_count">
+            <br><br>
+            <div class="input-group-addon">Rachunek:</div>
+            <input type="number" value="{{ reservation.bill }}" disabled>
+            <br><br>
+            <div class="input-group-addon">Opłacona:</div>
+            <input type="checkbox" value="paid" {% if reservation.payment_status %} checked {% endif %}
+                   name="payment_status">
+            <input type="hidden" name="form_sent" value="1">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Zapisz rezerwację</button>
+            <hr>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "hotelapp/base.html" %}
+
+{% block main_content %}
+<div class="container">
+    <form class="form-signin col-md-5" method="post">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Złóż rezerwację</h1>
+        <div class="input-group-addon">Pokój:</div>
+        <input type="text" id="inputRoomName" name="room_name" class="form-control" value="{{ room.name }}" required disabled>
+        <input type="hidden" id="inputRoomId" name="room_id" class="form-control" value="{{ room.id }}" required readonly>
+        <br>
+        <div class="input-group-addon">Od: &nbsp;</div>
+        <input type="date" id="start" name="date_start"
+               value="{{ date_start }}" required readonly>
+        <br> <br>
+        <div class="input-group-addon">Do: &nbsp;</div>
+        <input type="date" id="end" name="date_end"
+               value="{{ date_end }}" required readonly>
+        <br> <br>
+        <div class="input-group-addon">Liczba gości:</div>
+        <input type="number" min="1" max="{{ room.guests_count }}" name="guests_count"
+               value="{{ guests_count }}" required readonly>
+        <input type="hidden" name="confirmed" value="1">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Potwierdź rezerwację</button>
+    </form>
+</div>
+
+{% endblock %}

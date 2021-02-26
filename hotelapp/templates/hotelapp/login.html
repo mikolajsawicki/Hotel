@@ -1,0 +1,18 @@
+{% extends "hotelapp/base.html" %}
+
+{% block main_content %}
+
+
+<div class="container">
+  <form class="form-signin col-md-5" method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
+    <label for="inputEmail" class="sr-only">Adres e-mail</label>
+    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Adres e-mail" required autofocus>
+    <label for="inputPassword" class="sr-only">Hasło</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Hasło" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj się</button>
+  </form>
+</div>
+
+{% endblock %}

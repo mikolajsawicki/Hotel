@@ -1,0 +1,38 @@
+{% extends "hotelapp/base.html" %}
+
+{% block main_content %}
+<div class="container">
+    <br><br>
+    <h1>Moje rezerwacje</h1>
+
+    {% for reservation in reservations %}
+    <br>
+    <div class="col-md-6">
+        <h3>Rezerwacja</h3>
+        <hr>
+        <div class="input-group-addon">Pokój:</div>
+        <input type="text" id="inputRoomName" class="form-control" value="{{ reservation.room.name }}"
+               disabled>
+        <input type="hidden" id="inputRoomId" class="form-control" value="{{ reservation.room.id }}"
+               disabled>
+        <br>
+        <div class="input-group-addon">Od: &nbsp;</div>
+        <input type="text" id="start" value="{{ reservation.start_date }}" disabled>
+        <br> <br>
+        <div class="input-group-addon">Do: &nbsp;</div>
+        <input type="text" id="end" value="{{ reservation.end_date }}" disabled>
+        <br> <br>
+        <div class="input-group-addon">Liczba gości:</div>
+        <input type="number" value="{{ reservation.guests_count }}" disabled>
+        <br><br>
+        <div class="input-group-addon">Rachunek:</div>
+        <input type="number" value="{{ reservation.bill }}" disabled>
+        <br><br>
+        <div class="input-group-addon">Opłacona:</div>
+        <input type="text" value="{% if reservation.payment_status %} TAK {% else %} NIE {% endif %}" disabled>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
