@@ -16,19 +16,19 @@ Development:
 
 ## Download
 ```
-$ git clone https://github.com/mikolajsawicki/Hotel.git
+git clone https://github.com/mikolajsawicki/Hotel.git
 ```
 
 ## Build
 ```
-$ sudo apt-get install docker-compose OR $ sudo pacman -Syu docker-compose
-$ cd Hotel
-$ docker-compose build
+sudo apt-get install docker-compose OR $ sudo pacman -Syu docker-compose
+cd Hotel
+docker-compose build
 ```
 
 ## Run
 ```
-$ docker-compose up
+docker-compose up
 ```
 
 Now the server and database are up. You can open your browser and simply go to URL http://0.0.0.0:8000/
@@ -38,4 +38,4 @@ Now the server and database are up. You can open your browser and simply go to U
 ### Testing
 Running the tests:
 ```
-$ docker exec -it hotel_web_1 python manage.py test
+docker exec -it hotel_web_1 python manage.py test
