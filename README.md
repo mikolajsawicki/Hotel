@@ -22,6 +22,7 @@ git clone https://github.com/mikolajsawicki/Hotel.git
 ## Build
 ```
 sudo apt-get install docker-compose
+systemctl start docker
 cd Hotel
 docker-compose build
 ```
